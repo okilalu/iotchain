@@ -26,3 +26,19 @@ client_socket.close()
 # print ("Time: {:02d}:00, Lights: {}, Temperature: {:.1f}C, Humidity: {:.1f}%, Motion Detected: {}".format(
     #     hour, "On" if lights_on else "Off", temperature, humidity,  motion_detected))
     # print(message)
+
+# Konfigurasi MultiChain
+rpc_user = 'rpcuser'  # Ganti dengan nama pengguna RPC MultiChain Anda
+rpc_password = 'rpcpassword'  # Ganti dengan kata sandi RPC MultiChain Anda
+chain_name = 'mychain'  # Ganti dengan nama rantai MultiChain Anda
+rpc_port = 12345  # Ganti dengan port RPC MultiChain Anda
+
+# Membuat koneksi ke node MultiChain
+mc = multichain.MultiChain(chain_name, rpcport=rpc_port, rpcuser=rpc_user, rpcpassword=rpc_password)
+
+# Logic
+ try:
+        mc.publish('stream1', 'key1', data)
+        print("Data berhasil disimpan di MultiChain")
+    except multichain.MultichainException as e:
+        print("Gagal menyimpan data di MultiChain:", str(e))
