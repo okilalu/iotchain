@@ -1,4 +1,13 @@
 import socket
+from Savoir import Savoir
+
+rpcuser = 'multichainrpc'
+rpcpassword = '7iY4yXdDUTyhdzY4SdvP7zir2WvW1BKiFcC5CHx46wan'
+rpchost = '192.168.88.1'
+rpcport = '2000'
+chain_name = 'my-chain-clne'
+
+multichain = Savoir(rpcuser, rpcpassword, rpchost, rpcport, chain_name)
 
 server_ip = "192.168.88.1"
 server_port = 4000
@@ -14,6 +23,12 @@ print(f"Server mendengarkan di {addr}")
 def handle_recv_data():
     response = 'Node received the data'
     client_socket.send(response.encode())
+
+    try:
+        txid = multichain.publish("iotdata", "key1", data)
+        print("Data telah disimpan dengan TXID:", txid)
+    except Exception as e:
+        print("Error :", e)
 
     client_socket.close()
 
