@@ -14,7 +14,10 @@ def send_data(data):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client_socket.connect(addr)
 
+        size_data = len(data.encode())
+
         client_socket.send(data.encode())
+        print("Size data:", size_data, "bytes")
         print("Hex data:", data)
 
         response = client_socket.recv(1024).decode("utf-8")
@@ -53,7 +56,7 @@ if __name__ == "__main__":
             print(data)
             send_data(hex_data)
 
-            time.sleep()
+            time.sleep(1)
 
         except ConnectionAbortedError as e:
             print("Eror koneksi:", e)
